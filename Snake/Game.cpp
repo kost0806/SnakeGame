@@ -28,6 +28,7 @@ void Game::run() {
 		this->rander.randerMap(this->map);
 		Sleep(10);
 	}
+	this->rander.randerString("Game Over!!");
 }
 
 void Game::update() {

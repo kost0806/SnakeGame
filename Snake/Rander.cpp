@@ -42,7 +42,6 @@ void Rander::randerMap(int ** map) {
 	if ((curr_time = GetTickCount()) > last_randered + MS_PER_FRAME) {
 		this->last_randered = curr_time;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { (short)this->height, (short)this->width});
-		//std::system("cls");
 		for (short i = 0; i < this->height; ++i) {
 			for (short j = 0; j < this->width; ++j) {
 				if (this->map[i][j] != map[i][j]) {
@@ -67,5 +66,26 @@ void Rander::randerMap(int ** map) {
 }
 
 void Rander::randerString(std::string msg) {
-	std::cout << msg << "\n";
+	int length = msg.length();
+	short start_x_pos = this->width - length;
+	short start_y_pos = (this->height - 3) / 2;
+	
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { start_x_pos, start_y_pos });
+	for (int i = 0; i < length + 4; ++i) { // ###############
+		printf("#");
+	}
+
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { start_x_pos, start_y_pos + 1 });
+	printf("# ");
+	for (int i = 0; i < length; ++i) {
+		printf("%c", msg.at(i));
+	}
+	printf(" #");
+
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { start_x_pos, start_y_pos + 2 });
+	for (int i = 0; i < length + 4; ++i) { // ###############
+		printf("#");
+	}
+
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, (short)this->height });
 }
